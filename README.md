@@ -5,8 +5,9 @@ A broken ASP.NET core application to load into IIS so someone can reliably test 
 1. you need windows with IIS set up
 2. install [dotnet](https://dotnet.microsoft.com/en-us/download)
 3. install the [asp.net core runtime](https://dotnet.microsoft.com/en-us/download)
-4. install node (for build)
-5. `npm run build`
+4. build:
+    a. via npm: `npm run build`
+    b. via CLI: `dotnet publish src/broken-kestrel/broken-kestrel.csproj -o IIS`, run in the root of this repo
 6. set up an unmanaged app pool on IIS if you don't have one
 7. create a new site, point it at the `IIS` folder in this repo
     - eg, set up a site called broken.dev.local, pointed at the `IIS` folder
