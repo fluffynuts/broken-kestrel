@@ -1,0 +1,22 @@
+{
+  "name": "broken-kestrel",
+  "version": "1.0.0",
+  "description": "A broken ASP.NET core application to load into IIS so someone can reliably test against \"what if the app is broken?\"",
+  "main": "index.js",
+  "scripts": {
+    "build": "dotnet publish src/broken-kestrel/broken-kestrel.csproj -o IIS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluffynuts/broken-kestrel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fluffynuts/broken-kestrel/issues"
+  },
+  "homepage": "https://github.com/fluffynuts/broken-kestrel#readme",
+  "devDependencies": {
+  }
+}
