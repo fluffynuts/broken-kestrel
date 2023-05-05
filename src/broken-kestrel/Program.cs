@@ -1,3 +1,5 @@
+using broken_kestrel;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,12 +10,21 @@ var app = builder.Build();
 var configBuilder = new ConfigurationBuilder();
 configBuilder.AddJsonFile("appsettings.json");
 var config = configBuilder.Build();
-var appSettings = config.GetSection("AppSettings");
-var brokenSetting = appSettings["Broken"];
-var isBroken = brokenSetting?.ToLower() == "true";
-if (isBroken)
+
+if (config.AppSettingFlag(Settings.BREAK_EARLY))
 {
-    throw new Exception("Sorry, I'm broken, by design");
+    throw new Exception("Sorry, I'm broken, by design (early)");
+}
+
+if (config.AppSettingFlag(Settings.BREAK_LATER))
+{
+    var breakAfterSeconds = config.AppSettingInt(Settings.BREAK_LATER_DELAY_SECONDS);
+    var t = new Thread(() =>
+    {
+        Thread.Sleep(TimeSpan.FromSeconds(breakAfterSeconds));
+        throw new Exception("Sorry, I'm broken, by design (late)");
+    });
+    t.Start();
 }
 
 // Configure the HTTP request pipeline.
